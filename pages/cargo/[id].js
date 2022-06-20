@@ -14,12 +14,20 @@ const styles = {
 const CargoUpdate = () => {
   const [user, setUser] = useState({});
   const [cargo, setCargo] = useState({});
-  
+
   const router = useRouter();
-  const cargoId = router.query.id;
-  console.log("00cargo: ", cargoId);
- 
+  //const cargoId = router.query.id;
+  //console.log("00cargo: ", cargoId);
+
+  //const router = useRouter()
+
+  const { id } = router.query
+
+  console.log('Id Param -->: ' + id)
+
   React.useEffect(() => {
+    if (!router.isReady) return;
+    console.log('Id Param2 -->: ' + id)
 
     if (typeof window !== "undefined") {
       // const token = window.localStorage.getItem("token");
@@ -31,10 +39,12 @@ const CargoUpdate = () => {
       } else {
         (async () => {
           try {
-            const cargo = await cargoPorId(1);
+
+            const cargo = await cargoPorId(id);
             console.log('Data cargo: ' + cargo)
 
             console.log("token dashboard1: ", token);
+
             const data = await whoAmI();
             console.log('Data: ' + data)
             //console.log('Data: ' + data.token);
@@ -56,7 +66,7 @@ const CargoUpdate = () => {
         })();
       }
     }
-  }, []);
+  }, [router.isReady]);
 
   function redirectToLogin() {
     Router.push("/login");
@@ -64,9 +74,19 @@ const CargoUpdate = () => {
 
   return (
     <div>
-      <BaseLayout>{cargo}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-        <CargoRegisterForm cargo={cargo}/>
-        <div style={styles}>
+      <BaseLayout>
+          <CargoRegisterForm 
+          id={cargo.id} 
+          descricaoa={cargo.descricao} 
+          salario={cargo.salario} 
+          areaAtuacao={cargo.areaAtuacao} 
+          beneficios={cargo.beneficios} 
+          salario={cargo.salario} 
+          habilidadesDesejadas={cargo.habilidadesDesejadas} 
+          competenciasDesejadas={cargo.competenciasDesejadas} 
+          />
+          <span>{cargo.id}</span>
+           <div style={styles}>
           <Link href="/cargo">cargos</Link>
         </div>
       </BaseLayout>

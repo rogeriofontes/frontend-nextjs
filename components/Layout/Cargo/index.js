@@ -4,7 +4,11 @@ import Router from "next/router";
 import fontwhitecenter from '../../../styles/font-white-center';
 import fontwhite from '../../../styles/font-white';
 
-export function CargoRegisterForm({cargo}) {
+//const CargoRegisterForm = ({ cargo }) => {
+  
+export function CargoRegisterForm({id, descricaoa, experienciaa}) { // areaAtuacaoa, beneficiosa, salarioa, habilidadesDesejadasa, competenciasDesejadasa}) {
+  console.log('Cargo do Componente', id + descricaoa + experienciaa); //+ areaAtuacaoa + beneficiosa + salarioa + habilidadesDesejadasa + competenciasDesejadasa);
+
   const [descricao, setDescricao] = useState("");
   const [experiencia, setExperiencia] = useState("");
   const [areaAtuacao, setAreaAtuacao] = useState("");
@@ -40,7 +44,6 @@ export function CargoRegisterForm({cargo}) {
 
   return (
     <div>
-      {cargo}
       <p style={fontwhitecenter}>{msg}</p>
       <form onSubmit={handleSubmit}>
         <fieldset>
@@ -143,4 +146,6 @@ export function CargoRegisterForm({cargo}) {
       </form>
     </div>
   );
-}
+};
+
+//export default CargoRegisterForm;
