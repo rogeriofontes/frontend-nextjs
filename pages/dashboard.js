@@ -25,22 +25,11 @@ export default function Dashboard() {
         (async () => {
           try {
             console.log("token dashboard1: ", token);
-            /*const res = await fetch("http://localhost:8080/api/v1/usuarios/1", {
-              method: "GET",
-              headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': token
-              },
-            });*/
-
-            //const data = await res.json();
-            //console.log("Data Usuario:", data);
             const data = await whoAmI();
             console.log('Data: ' + data)
             //console.log('Data: ' + data.token);
-            var username = JSON.stringify(data.nome);
-            console.log('user: ' + username);
+            var email = JSON.stringify(data.email);
+            console.log('user: ' + email);
             if (data.error === "Unauthorized") {
               // User is unauthorized and there is no way to support the User, it should be redirected to the Login page and try to logIn again.
               redirectToLogin();
@@ -68,7 +57,7 @@ export default function Dashboard() {
     redirectToLogin();
   }
 
-  if (user.hasOwnProperty("username")) {
+  if (user.hasOwnProperty("email")) {
     return (
       <>
         <nav className="navbar navbar-light" style={{ backgroundColor: "#e3f2fd" }}>
@@ -86,16 +75,21 @@ export default function Dashboard() {
             </button>
           </div>
         </nav>
-        <h3>{user.username}'s Profile</h3>
+        <h3>{user.email}'s Profile</h3>
+        
+       <div style={styles}>
+          <Link href="/cargos"><span>Gerenciar cargos</span></Link>
+        </div>
         <style jsx>{`
         h3 {
           color: white;
           font-size: 30px;
         }
+        span {
+          color: white;
+          font-size: 30px;
+        }
       `}</style>
-       <div style={styles}>
-          <Link href="/cargo">Gerencia cargos</Link>
-        </div>
       </>
     );
   }

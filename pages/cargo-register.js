@@ -58,7 +58,7 @@ const CargoRegister = () => {
         <CargoRegisterForm />
 
         <div style={styles}>
-          <Link href="/cargo">cargos</Link>
+          <Link href="/cargos">cargos</Link>
         </div>
       </BaseLayout>
     </div>

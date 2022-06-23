@@ -31,8 +31,16 @@ export function CargoRegisterForm({id, descricaoa, experienciaa}) { // areaAtuac
         competenciasDesejadas: competenciasDesejadas
       });
 
-      if (!dataResponse.ok) {
+      console.log("Resposta" + dataResponse);
+      if (!dataResponse.status === 201) {
         setMessage('Erro ao registar dados!');
+      } else if (dataResponse.status === 201) {
+        setMessage("Dados Cadastrados")
+        console.log("Dados Cadastrados")
+
+        let intervalId = setTimeout(reload, 3000);
+        console.log('Interval: ' + intervalId);
+
       } else {
         Router.push("/login");
       }
@@ -40,6 +48,10 @@ export function CargoRegisterForm({id, descricaoa, experienciaa}) { // areaAtuac
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function reload() {
+    window.location.reload();
   }
 
   return (

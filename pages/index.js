@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const qs = require('qs');
 
-export default function Home({ articles }) {
+export default function Home() {
   return (
     <div>
 
@@ -68,29 +68,4 @@ export default function Home({ articles }) {
     </div>
 
   );
-}
-
-export async function getServerSideProps() {
-
-  const query = qs.stringify({
-    populate: [
-      'tags',
-      'photo',
-      'authors',
-      'authors.photo',
-      'author',
-      'author.photo',
-      
-    ],
-  }, {
-    encodeValuesOnly: true,
-  });
-
-  const response = await fetch(`http://localhost:1337/api/articles?${query}`);//&populate=*
-  const articles = await response.json();
-  return {
-    props: {
-      articles: articles.data,
-    },
-  };
 }
